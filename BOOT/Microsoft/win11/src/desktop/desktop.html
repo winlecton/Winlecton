@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>WinLectron — Windows 11</title>
+<link rel="stylesheet" href="../gui/style.css"/>
+<script src="desktop.js" defer></script>
+</head>
+<body>
+
+<div id="desktop"></div>
+
+<!-- Context Menu -->
+<div id="context-menu">
+  <div class="ctx-item" data-action="refresh">↺ &nbsp;Refresh</div>
+  <div class="ctx-item" data-action="new-folder">📁 &nbsp;New Folder</div>
+  <div class="ctx-sep"></div>
+  <div class="ctx-item" data-action="display">🖥 &nbsp;Display settings</div>
+  <div class="ctx-item" data-action="personalize">🎨 &nbsp;Personalize</div>
+  <div class="ctx-sep"></div>
+  <div class="ctx-item" data-action="terminal">⌨️ &nbsp;Open in Terminal</div>
+  <div class="ctx-item" data-action="about">ℹ &nbsp;About WinLectron</div>
+</div>
+
+<!-- Taskbar -->
+<div id="taskbar">
+  <div id="taskbar-center">
+    <div id="start-btn" title="Start" onclick="toggleStart()">
+      <svg viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2"  y="2"  width="38" height="38" fill="#0067C0" rx="6"/>
+        <rect x="48" y="2"  width="38" height="38" fill="#0067C0" rx="6"/>
+        <rect x="2"  y="48" width="38" height="38" fill="#0067C0" rx="6"/>
+        <rect x="48" y="48" width="38" height="38" fill="#0067C0" rx="6"/>
+      </svg>
+    </div>
+    <div id="taskbar-apps"></div>
+  </div>
+  <div id="system-tray">
+    <svg width="14" height="14" fill="white" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+    <svg width="14" height="14" fill="white" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+    <div id="clock"></div>
+  </div>
+</div>
+
+<!-- Start Menu -->
+<div id="start-menu">
+  <input class="start-search" placeholder="🔍  Type here to search" readonly/>
+  <div class="start-section-title">Pinned</div>
+  <div class="start-apps-grid" id="start-pinned"></div>
+  <div class="start-section-title">Recommended</div>
+  <div class="start-apps-grid" id="start-all"></div>
+  <div class="start-footer">
+    <div class="start-user">
+      <div style="width:32px;height:32px;border-radius:50%;background:#0067C0;display:flex;align-items:center;justify-content:center;font-size:16px">👤</div>
+      <span>User</span>
+    </div>
+    <div class="start-power" title="Power" onclick="if(confirm('Shut down WinLectron?')) window.close()">⏻</div>
+  </div>
+</div>
+
+</body>
+</html>

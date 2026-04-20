@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>WinLectron — Windows 10</title>
+<link rel="stylesheet" href="../gui/style.css"/>
+<script src="desktop.js" defer></script>
+</head>
+<body>
+
+<!-- Desktop -->
+<div id="desktop">
+  <!-- Icons placed by JS -->
+</div>
+
+<!-- Context Menu -->
+<div id="context-menu">
+  <div class="ctx-item" data-action="refresh">↺ &nbsp;Refresh</div>
+  <div class="ctx-item" data-action="new-folder">📁 &nbsp;New Folder</div>
+  <div class="ctx-sep"></div>
+  <div class="ctx-item" data-action="display">🖥 &nbsp;Display settings</div>
+  <div class="ctx-item" data-action="personalize">🎨 &nbsp;Personalize</div>
+  <div class="ctx-sep"></div>
+  <div class="ctx-item" data-action="about">ℹ &nbsp;About WinLectron</div>
+</div>
+
+<!-- Taskbar -->
+<div id="taskbar">
+  <div id="start-btn" title="Start" onclick="toggleStart()">
+    <svg viewBox="0 0 22 22" fill="#0078D4" xmlns="http://www.w3.org/2000/svg">
+      <rect x="1" y="1" width="9" height="9" rx="1"/>
+      <rect x="12" y="1" width="9" height="9" rx="1"/>
+      <rect x="1" y="12" width="9" height="9" rx="1"/>
+      <rect x="12" y="12" width="9" height="9" rx="1"/>
+    </svg>
+  </div>
+  <div id="taskbar-apps"></div>
+  <div id="system-tray">
+    <svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+    <div id="clock"></div>
+  </div>
+</div>
+
+<!-- Start Menu -->
+<div id="start-menu">
+  <div class="start-sidebar">
+    <div class="sidebar-btn" title="User">
+      <svg fill="white" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+    </div>
+    <div class="sidebar-btn" style="margin-top:auto;" title="Settings" onclick="openWindow('settings')">
+      <svg fill="white" viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+    </div>
+    <div class="sidebar-btn" title="Power" onclick="if(confirm('Shut down WinLectron?')) window.close()">
+      <svg fill="white" viewBox="0 0 24 24"><path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"/></svg>
+    </div>
+  </div>
+  <div class="start-content">
+    <div class="start-section-title">Pinned</div>
+    <div class="start-apps-grid" id="start-pinned"></div>
+    <div class="start-section-title">All apps</div>
+    <div class="start-apps-grid" id="start-all"></div>
+  </div>
+</div>
+
+</body>
+</html>

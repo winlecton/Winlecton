@@ -1,0 +1,238 @@
+/* ─── Win10 Desktop GUI Styles ─── */
+:root {
+  --accent: #0078D4;
+  --accent-dark: #005a9e;
+  --taskbar-bg: rgba(0,0,0,0.85);
+  --taskbar-height: 48px;
+  --window-border: rgba(255,255,255,0.15);
+  --glass: rgba(25,25,25,0.92);
+  --text: #ffffff;
+  --text-dim: #aaaaaa;
+  --start-bg: rgba(18,18,18,0.97);
+  --context-bg: rgba(30,30,30,0.98);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: url('https://picsum.photos/seed/win10/1920/1080') center/cover no-repeat;
+  height: 100vh;
+  overflow: hidden;
+  user-select: none;
+  color: var(--text);
+}
+
+/* ── Desktop Icons ── */
+#desktop {
+  width: 100%;
+  height: calc(100vh - var(--taskbar-height));
+  position: relative;
+  padding: 16px;
+}
+
+.icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 72px;
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  position: absolute;
+  transition: background 0.1s;
+}
+.icon:hover { background: rgba(255,255,255,0.15); }
+.icon.selected { background: rgba(0,120,212,0.4); outline: 1px solid var(--accent); }
+.icon img, .icon .icon-svg { width: 40px; height: 40px; }
+.icon span { font-size: 11px; text-align: center; text-shadow: 0 1px 3px rgba(0,0,0,0.8); word-break: break-word; }
+
+/* ── Taskbar ── */
+#taskbar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: var(--taskbar-height);
+  background: var(--taskbar-bg);
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  z-index: 1000;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+#start-btn {
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+#start-btn:hover { background: rgba(255,255,255,0.1); }
+#start-btn svg { width: 20px; height: 20px; }
+
+#taskbar-apps {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  padding: 0 4px;
+}
+
+.taskbar-app {
+  height: 40px;
+  padding: 0 10px;
+  display: flex; align-items: center; gap: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.1s;
+  position: relative;
+}
+.taskbar-app:hover { background: rgba(255,255,255,0.1); }
+.taskbar-app.active { background: rgba(255,255,255,0.15); }
+.taskbar-app.active::after {
+  content: '';
+  position: absolute;
+  bottom: 2px; left: 50%;
+  transform: translateX(-50%);
+  width: 16px; height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+.taskbar-app svg { width: 18px; height: 18px; }
+
+#system-tray {
+  display: flex; align-items: center; gap: 6px;
+  padding: 0 12px;
+  cursor: pointer;
+}
+#clock { font-size: 11px; text-align: right; line-height: 1.4; }
+
+/* ── Start Menu ── */
+#start-menu {
+  position: fixed;
+  bottom: var(--taskbar-height);
+  left: 0;
+  width: 580px;
+  height: 480px;
+  background: var(--start-bg);
+  backdrop-filter: blur(30px);
+  border: 1px solid var(--window-border);
+  border-radius: 4px 4px 0 0;
+  display: none;
+  z-index: 2000;
+  overflow: hidden;
+  box-shadow: 4px -4px 20px rgba(0,0,0,0.6);
+}
+#start-menu.open { display: flex; }
+
+.start-sidebar {
+  width: 48px;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 0;
+  gap: 4px;
+  border-right: 1px solid rgba(255,255,255,0.05);
+}
+.sidebar-btn {
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 4px; cursor: pointer;
+  transition: background 0.1s;
+}
+.sidebar-btn:hover { background: rgba(255,255,255,0.1); }
+.sidebar-btn svg { width: 20px; height: 20px; opacity: 0.8; }
+
+.start-content {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+}
+.start-section-title { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.start-apps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 72px);
+  gap: 4px;
+  margin-bottom: 24px;
+}
+.start-app {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 8px 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.start-app:hover { background: rgba(255,255,255,0.1); }
+.start-app-icon { width: 40px; height: 40px; border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+.start-app span { font-size: 10px; text-align: center; }
+
+/* ── Windows ── */
+.window {
+  position: fixed;
+  background: var(--glass);
+  border: 1px solid var(--window-border);
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  min-width: 400px;
+  min-height: 300px;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+}
+.window.focused { z-index: 600; border-color: rgba(0,120,212,0.5); }
+
+.window-titlebar {
+  height: 32px;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 12px;
+  cursor: move;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.window-title { font-size: 12px; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.window-controls { display: flex; }
+.wc-btn {
+  width: 46px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background 0.1s;
+  font-size: 14px;
+}
+.wc-btn:hover { background: rgba(255,255,255,0.1); }
+.wc-btn.close:hover { background: #c42b1c; }
+
+.window-content {
+  flex: 1;
+  overflow: auto;
+  padding: 16px;
+  font-size: 13px;
+}
+
+/* ── Context Menu ── */
+#context-menu {
+  position: fixed;
+  background: var(--context-bg);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px;
+  padding: 4px 0;
+  min-width: 180px;
+  z-index: 9999;
+  display: none;
+  box-shadow: 4px 4px 16px rgba(0,0,0,0.6);
+  font-size: 13px;
+}
+#context-menu.show { display: block; }
+.ctx-item {
+  padding: 8px 16px;
+  cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+  transition: background 0.1s;
+}
+.ctx-item:hover { background: var(--accent); }
+.ctx-sep { height: 1px; background: rgba(255,255,255,0.08); margin: 4px 0; }

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WinLectron — Windows 10</title>
+<script src="boot.js" defer></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #000;
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    user-select: none;
+  }
+  .logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 60px;
+    animation: fadeIn 1s ease forwards;
+  }
+  .win-logo svg { width: 64px; height: 64px; }
+  .logo-text { font-size: 28px; font-weight: 300; letter-spacing: 2px; color: #fff; }
+  .spinner-wrap {
+    display: flex;
+    gap: 8px;
+    animation: fadeIn 0.5s ease 1s forwards;
+    opacity: 0;
+  }
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #0078D4;
+    animation: bounce 1.2s infinite ease-in-out;
+  }
+  .dot:nth-child(2) { animation-delay: 0.15s; }
+  .dot:nth-child(3) { animation-delay: 0.3s; }
+  .dot:nth-child(4) { animation-delay: 0.45s; }
+  .dot:nth-child(5) { animation-delay: 0.6s; }
+  @keyframes bounce {
+    0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+    40% { transform: scale(1.2); opacity: 1; }
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .version { position: absolute; bottom: 24px; font-size: 12px; color: #555; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+  <div class="logo-wrap">
+    <div class="win-logo">
+      <svg viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="2" width="38" height="38" fill="#0078D4" rx="2"/>
+        <rect x="48" y="2" width="38" height="38" fill="#0078D4" rx="2"/>
+        <rect x="2" y="48" width="38" height="38" fill="#0078D4" rx="2"/>
+        <rect x="48" y="48" width="38" height="38" fill="#0078D4" rx="2"/>
+      </svg>
+    </div>
+    <div class="logo-text">Windows 10</div>
+  </div>
+  <div class="spinner-wrap">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+  <div class="version">WinLectron Build 1H26H1 · Simulated Environment</div>
+</body>
+</html>
