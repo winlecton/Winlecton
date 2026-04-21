@@ -8,53 +8,92 @@
 </head>
 <body>
 
+<!-- Desktop -->
 <div id="desktop"></div>
 
 <!-- Context Menu -->
-<div id="context-menu">
+<div id="ctx-menu">
   <div class="ctx-item" data-action="refresh">↺ &nbsp;Refresh</div>
-  <div class="ctx-item" data-action="new-folder">📁 &nbsp;New Folder</div>
+  <div class="ctx-item" data-action="newfolder">📁 &nbsp;New Folder</div>
   <div class="ctx-sep"></div>
   <div class="ctx-item" data-action="display">🖥 &nbsp;Display settings</div>
-  <div class="ctx-item" data-action="personalize">🎨 &nbsp;Personalize</div>
+  <div class="ctx-item" data-action="personalize">🎨 &nbsp;Personalise</div>
   <div class="ctx-sep"></div>
   <div class="ctx-item" data-action="terminal">⌨️ &nbsp;Open in Terminal</div>
   <div class="ctx-item" data-action="about">ℹ &nbsp;About WinLectron</div>
 </div>
 
+<!-- Notification Panel -->
+<div id="notif-panel">
+  <div class="notif-header">
+    <span>Notifications</span>
+    <span style="font-size:11px;color:#888;cursor:pointer" onclick="clearNotifs()">Clear all</span>
+  </div>
+  <div id="notif-list">
+    <div class="notif-card"><b>WinLectron</b><br><span style="color:#aaa">Welcome to Windows 11 Simulator!</span></div>
+    <div class="notif-card"><b>Windows Update</b><br><span style="color:#aaa">Your device is up to date.</span></div>
+  </div>
+  <div class="quick-actions">
+    <div class="qa-btn on">📶<br>Wi-Fi</div>
+    <div class="qa-btn on">🔵<br>Bluetooth</div>
+    <div class="qa-btn">✈️<br>Flight mode</div>
+    <div class="qa-btn on">🌙<br>Night light</div>
+    <div class="qa-btn">🎯<br>Focus</div>
+    <div class="qa-btn on">📍<br>Location</div>
+    <div class="qa-btn">♿<br>Accessibility</div>
+    <div class="qa-btn">📱<br>Cast</div>
+  </div>
+</div>
+
 <!-- Taskbar -->
 <div id="taskbar">
   <div id="taskbar-center">
-    <div id="start-btn" title="Start" onclick="toggleStart()">
-      <svg viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
-        <rect x="2"  y="2"  width="38" height="38" fill="#0067C0" rx="6"/>
-        <rect x="48" y="2"  width="38" height="38" fill="#0067C0" rx="6"/>
-        <rect x="2"  y="48" width="38" height="38" fill="#0067C0" rx="6"/>
-        <rect x="48" y="48" width="38" height="38" fill="#0067C0" rx="6"/>
+    <!-- Start button -->
+    <div id="start-btn" onclick="toggleStart()" title="Start">
+      <svg width="20" height="20" viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2"  y="2"  width="38" height="38" fill="#0067C0" rx="5"/>
+        <rect x="48" y="2"  width="38" height="38" fill="#0067C0" rx="5"/>
+        <rect x="2"  y="48" width="38" height="38" fill="#0067C0" rx="5"/>
+        <rect x="48" y="48" width="38" height="38" fill="#0067C0" rx="5"/>
       </svg>
     </div>
+    <!-- Pinned taskbar apps -->
+    <div class="tapp" title="File Explorer" onclick="openWindow('explorer')">📁</div>
+    <div class="tapp" title="Edge" onclick="openWindow('browser')">🌐</div>
+    <div class="tapp" title="Store" onclick="openWindow('store')">🛒</div>
+    <!-- Open window apps added here by JS -->
     <div id="taskbar-apps"></div>
   </div>
+  <!-- System tray -->
   <div id="system-tray">
-    <svg width="14" height="14" fill="white" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
-    <svg width="14" height="14" fill="white" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
-    <div id="clock"></div>
+    <div class="tray-btn" title="Network">📶</div>
+    <div class="tray-btn" title="Volume">🔊</div>
+    <div class="tray-btn" title="Battery">🔋</div>
+    <div class="tray-btn clock-widget" id="clock-widget" onclick="toggleNotif()">
+      <span id="clock-time">00:00</span>
+      <span id="clock-date" style="font-size:10px;color:#aaa">1/1/2026</span>
+    </div>
+    <div class="tray-btn" onclick="toggleNotif()" title="Notifications">🔔</div>
   </div>
 </div>
 
 <!-- Start Menu -->
 <div id="start-menu">
-  <input class="start-search" placeholder="🔍  Type here to search" readonly/>
-  <div class="start-section-title">Pinned</div>
-  <div class="start-apps-grid" id="start-pinned"></div>
-  <div class="start-section-title">Recommended</div>
-  <div class="start-apps-grid" id="start-all"></div>
-  <div class="start-footer">
-    <div class="start-user">
-      <div style="width:32px;height:32px;border-radius:50%;background:#0067C0;display:flex;align-items:center;justify-content:center;font-size:16px">👤</div>
+  <div class="sm-search-bar">
+    <input class="sm-search-input" placeholder="🔍  Search for apps, files, settings..." readonly/>
+  </div>
+  <div class="sm-body">
+    <div class="sm-section-title">Pinned</div>
+    <div class="sm-pinned-grid" id="sm-pinned"></div>
+    <div class="sm-section-title">Recommended</div>
+    <div class="sm-pinned-grid" id="sm-recommended"></div>
+  </div>
+  <div class="sm-footer">
+    <div class="sm-user">
+      <div class="sm-avatar">👤</div>
       <span>User</span>
     </div>
-    <div class="start-power" title="Power" onclick="if(confirm('Shut down WinLectron?')) window.close()">⏻</div>
+    <div class="sm-power" title="Power" onclick="if(confirm('Shut down WinLectron?')) window.close()">⏻</div>
   </div>
 </div>
 
